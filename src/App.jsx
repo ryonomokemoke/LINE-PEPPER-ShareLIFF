@@ -22,12 +22,10 @@ function App() {
         alert("LIFF init succeeded.");
         // LIFF初期化後、URLからshop_idを取得
         const params = new URLSearchParams(window.location.search);
-        alert(params.get('shop_id'));
-        setShopId(params.get('shop_id'));
-
-        setShopInfo(fetchShopInfo(shopId));
-        alert("shopId" + shopId);
-        alert("shopInfo" + shopInfo);
+        const shopId = params.get('shop_id');
+        alert("shopId: " + shopId);
+        setShopId(shopId);
+        fetchShopInfo(shopId); // fetchShopInfoを呼び出し
       })
       .catch((error) => {
         alert("LIFF init failed.");
@@ -35,15 +33,14 @@ function App() {
         alert(error);
       });
   };
-
-
+  
   const fetchShopInfo = (shopId) => {
     axios.get(`https://53ba-110-2-51-27.ngrok-free.app/shop_info?shop_id=${shopId}`)
       .then(response => {
         if (!response.data) {
           throw new Error('Empty response received');
         }
-        setShopInfo(response);
+        setShopInfo(response.data); // shopInfoをresponse.dataで更新
       })
       .catch(error => {
         setError(`Error fetching shop info: ${error.message}`);
