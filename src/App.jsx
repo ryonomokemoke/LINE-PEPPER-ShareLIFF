@@ -69,7 +69,7 @@ function App() {
         <div>
           <h2>Shop Information</h2>
           <p>Name: {shopInfo.name}</p>
-          <p>Address: {shopInfo.address}</p>
+          <p>{shopInfo}</p>
           {/* 他の情報を表示 */}
         </div>
       )}
