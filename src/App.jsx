@@ -5,7 +5,6 @@ import "./App.css";
 import axios from 'axios';
 
 function App() {
-  const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const [shopId, setShopId] = useState("");
   const [shopInfo, setShopInfo] = useState(null);
@@ -20,16 +19,16 @@ function App() {
         liffId: import.meta.env.VITE_LIFF_ID // ローカルではこっち
       })
       .then(() => {
-        setMessage("LIFF init succeeded.");
+        alert("LIFF init succeeded.");
         // LIFF初期化後、URLからshop_idを取得
         const params = new URLSearchParams(window.location.search);
-        const shopIdParam = params.get('shop_id');
-        setShopId(shopIdParam);
-        alert(shopIdParam);
+        setShopId(params.get('shop_id'));
+        setShopInfo(fetchShopInfo(shopId));
         alert(shopId);
+        alert(shopInfo);
       })
       .catch((error) => {
-        setMessage("LIFF init failed.");
+        alert("LIFF init failed.");
         setError(`${error}`);
         alert(error);
       });
@@ -42,7 +41,7 @@ function App() {
         if (!response.data) {
           throw new Error('Empty response received');
         }
-        setShopInfo(response.data);
+        setShopInfo(response);
       })
       .catch(error => {
         setError(`Error fetching shop info: ${error.message}`);
