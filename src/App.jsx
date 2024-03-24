@@ -8,6 +8,7 @@ function App() {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const [shopId, setShopId] = useState("");
+  const [shopInfo, setShopInfo] = useState(null);
 
   useEffect(() => {
     initializeLIFF();
