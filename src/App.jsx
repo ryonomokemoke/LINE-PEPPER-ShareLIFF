@@ -25,6 +25,8 @@ function App() {
         const params = new URLSearchParams(window.location.search);
         const shopIdParam = params.get('shop_id');
         setShopId(shopIdParam);
+        alert(shopIdParam);
+        alert(shopId);
       })
       .catch((error) => {
         setMessage("LIFF init failed.");
