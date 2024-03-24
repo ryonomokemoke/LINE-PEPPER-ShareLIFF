@@ -34,7 +34,7 @@ function App() {
 
 
   const fetchShopInfo = (shopId) => {
-    fetch(`https://example.com/shop_info?shop_id=${shopId}`)
+    fetch(`https://https://53ba-110-2-51-27.ngrok-free.app/shop_info?shop_id=${shopId}`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
