@@ -62,6 +62,9 @@ function App() {
       {shopId && (
         <p>Shop ID: {shopId}</p>
       )}
+      {
+        <p>test</p>
+      }
       {shopInfo && (
         <div>
           <h2>Shop Information</h2>
