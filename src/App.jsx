@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import liff from "@line/liff";
 import "./App.css";
 
-import Form from './components/Form';
+import axios from 'axios';
 
 function App() {
   const [message, setMessage] = useState("");
@@ -37,18 +37,15 @@ function App() {
 
 
   const fetchShopInfo = (shopId) => {
-    fetch(`https://53ba-110-2-51-27.ngrok-free.app/shop_info?shop_id=${shopId}`)
+    axios.get(`https://53ba-110-2-51-27.ngrok-free.app/shop_info?shop_id=${shopId}`)
       .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
+        if (!response.data) {
+          throw new Error('Empty response received');
         }
-        return response.json();
-      })
-      .then(data => {
-        setShopInfo(data);
+        setShopInfo(response.data);
       })
       .catch(error => {
-        setError(`Error fetching shop info: ${error}`);
+        setError(`Error fetching shop info: ${error.message}`);
       });
   };
 
