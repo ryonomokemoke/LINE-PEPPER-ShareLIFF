@@ -25,9 +25,6 @@ function App() {
         alert(params.get('shop_id'));
         setShopId(params.get('shop_id'));
 
-        setShopId("J000158656");
-
-
         setShopInfo(fetchShopInfo(shopId));
         alert("shopId" + shopId);
         alert("shopInfo" + shopInfo);
