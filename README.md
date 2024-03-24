@@ -1,10 +1,10 @@
-# SendSearchQuery とは
+# ShareLIFF とは
 
-検索フォームを備えたLiffアプリです。
-入力した条件をLinePepperBotが認識できる形で送信されます。
-
-# 使用方法
-Lineトーク画面でliffURLを開きます
+カルーセルメッセージを共有するLiffアプリです。
+1. liffUrlの?shop_id=*** で仕込まれた値を取得
+2. バックエンドのDBから店舗情報取得
+3. カルーセルメッセージ作成
+4. カルーセルメッセージ共有
 
 # 内部の挙動
 liffURL -> netlify にリダイレクト。

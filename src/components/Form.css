@@ -1,0 +1,16 @@
+.forms-container {
+    /* text-align: center; フリーワードのラベルを右揃えにする */
+    display: flex; /* 子要素を水平方向に配置 */
+    justify-content: left; /* 子要素を中央に配置 */
+  }
+
+  .form-container {
+    text-align: left; /* フリーワードのラベルを右揃えにする */
+    
+  }
+  
+  .form-container label {
+    display: inline-block;
+    text-align: left; /* ラベルのテキストを左揃えにする */
+  }
+  
