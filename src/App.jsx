@@ -32,6 +32,23 @@ function App() {
       });
   };
 
+
+  const fetchShopInfo = (shopId) => {
+    fetch(`https://example.com/shop_info?shop_id=${shopId}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        setShopInfo(data);
+      })
+      .catch(error => {
+        setError(`Error fetching shop info: ${error}`);
+      });
+  };
+
   return (
     <div className="App">
       
@@ -44,6 +61,14 @@ function App() {
       )}
       {shopId && (
         <p>Shop ID: {shopId}</p>
+      )}
+      {shopInfo && (
+        <div>
+          <h2>Shop Information</h2>
+          <p>Name: {shopInfo.name}</p>
+          <p>Address: {shopInfo.address}</p>
+          {/* 他の情報を表示 */}
+        </div>
       )}
     </div>
   );
