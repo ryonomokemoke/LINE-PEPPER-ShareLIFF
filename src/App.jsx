@@ -38,8 +38,8 @@ function App() {
     fetch(url, {
       method: "get",
       headers: new Headers({
-        "ngrok-skip-browser-warning": "69420",
-      }),
+        "ngrok-skip-browser-warning": "69420"
+      })
     })
     .then((response) => response.json())
     .then((data) => alert(data))
