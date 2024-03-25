@@ -23,6 +23,7 @@ function App() {
         // LIFF初期化後、URLからshop_idを取得
         const params = new URLSearchParams(window.location.search);
         const shopId = params.get('shop_id');
+        alert(shopId);
         fetchShopInfo(shopId); // fetchShopInfoを呼び出し
       })
       .catch((error) => {
@@ -33,15 +34,15 @@ function App() {
   };
   
   const fetchShopInfo = (shopId) => {
-    axios.get(`https://53ba-110-2-51-27.ngrok-free.app/shop_info?shop_id=${shopId}`, {headers: {
+    axios.get(`https://67f0-110-2-51-27.ngrok-free.app/shop_info?shop_id=${shopId}`, {headers: {
       "ngrok-skip-browser-warning": "69420"
     }})
       .then(response => {
-        if (!response.data) {
+        if (!response.name) {
           alert('Empty response received');
         }
-        alert(`get response: ${response.data}`)
-        setShopInfo(response.data); // shopInfoをresponse.dataで更新
+        alert(`get response: ${response}`)
+        setShopInfo(response); // shopInfoをresponse.dataで更新
       })
       .catch(error => {
         setError(`Error fetching shop info: ${error.message}`);
