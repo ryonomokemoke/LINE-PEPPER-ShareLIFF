@@ -33,6 +33,8 @@ function App() {
   };
   
   const fetchShopInfo = (shopId) => {
+
+    const url = "https://67f0-110-2-51-27.ngrok-free.app/shop_info?shop_id=" + shopId;
     fetch(url, {
       method: "get",
       headers: new Headers({
@@ -43,7 +45,7 @@ function App() {
     .then((data) => alert(data))
     .catch((err) => alert(err));
 
-    axios.get("https://67f0-110-2-51-27.ngrok-free.app/shop_info?shop_id=" + shopId, {headers: {
+    axios.get(url, {headers: {
       "ngrok-skip-browser-warning": "69420"
     }})
       .then(response => {
