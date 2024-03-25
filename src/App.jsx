@@ -33,7 +33,9 @@ function App() {
   };
   
   const fetchShopInfo = (shopId) => {
-    axios.get(`https://53ba-110-2-51-27.ngrok-free.app/shop_info?shop_id=${shopId}`)
+    axios.get(`https://53ba-110-2-51-27.ngrok-free.app/shop_info?shop_id=${shopId}`, {headers: {
+      "ngrok-skip-browser-warning": "69420"
+    }})
       .then(response => {
         if (!response.data) {
           alert('Empty response received');
