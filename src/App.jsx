@@ -33,11 +33,9 @@ function App() {
   };
   
   const fetchShopInfo = (shopId) => {
-    alert(shopId);
-    axios.get(`https://www.hotpepper.jp/CSP/psh010/doBasic?&SA=SA11&&&`)
-    // axios.get(`https://67f0-110-2-51-27.ngrok-free.app/shop_info?shop_id=${shopId}`, {headers: {
-    //   "ngrok-skip-browser-warning": "69420"
-    // }})
+    axios.get("https://67f0-110-2-51-27.ngrok-free.app/shop_info?shop_id=" + shopId, {headers: {
+      "ngrok-skip-browser-warning": "69420"
+    }})
       .then(response => {
         if (!response.name) {
           alert('Empty response received');
