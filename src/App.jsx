@@ -48,30 +48,30 @@ function App() {
   };
 
   return (
-    <div className="App">
-      
-      <h1>店舗を共有</h1>
-      {error && (
-        <p>
-          <code>{error}</code>
-        </p>
+    <>
+      <div className="App">
         
-      )}
-      {shopId && (
+        <h1>店舗を共有</h1>
         <p>Shop ID: {shopId}</p>
-      )}
-      {
-        <p>test</p>
-      }
-      {shopInfo && (
-        <div>
-          <h2>Shop Information</h2>
-          <p>Name: {shopInfo.name}</p>
-          <p>{shopInfo}</p>
-          {/* 他の情報を表示 */}
-        </div>
-      )}
-    </div>
+        {error && (
+          <p>
+            <code>{error}</code>
+          </p>
+          
+        )}
+        {shopId && (
+          <p>Shop ID: {shopId}</p>
+        )}
+        {shopInfo && (
+          <div>
+            <h2>Shop Information</h2>
+            <p>Name: {shopInfo.name}</p>
+            <p>{shopInfo}</p>
+            {/* 他の情報を表示 */}
+          </div>
+        )}
+      </div>
+    </>
   );
 }
 
