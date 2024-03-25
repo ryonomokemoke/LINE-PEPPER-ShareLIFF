@@ -33,9 +33,10 @@ function App() {
   };
   
   const fetchShopInfo = (shopId) => {
-
+    
     const url = "https://0b6ca0b68086.ngrok.app/shop_info?shop_id=" + shopId;
-
+    alert(url);
+    // https://0b6ca0b68086.ngrok.app/shop_info?shop_id=J000650960
     axios.get(url, {headers: {
       "ngrok-skip-browser-warning": "69420"
     }})
