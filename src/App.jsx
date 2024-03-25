@@ -23,7 +23,6 @@ function App() {
         // LIFF初期化後、URLからshop_idを取得
         const params = new URLSearchParams(window.location.search);
         const shopId = params.get('shop_id');
-        alert(shopId);
         fetchShopInfo(shopId); // fetchShopInfoを呼び出し
       })
       .catch((error) => {
@@ -34,6 +33,7 @@ function App() {
   };
   
   const fetchShopInfo = (shopId) => {
+    alert(shopId);
     axios.get(`https://www.hotpepper.jp/CSP/psh010/doBasic?&SA=SA11&&&`)
     // axios.get(`https://67f0-110-2-51-27.ngrok-free.app/shop_info?shop_id=${shopId}`, {headers: {
     //   "ngrok-skip-browser-warning": "69420"
@@ -61,9 +61,6 @@ function App() {
             <code>{error}</code>
           </p>
           
-        )}
-        {shopId && (
-          <p>Shop ID: {shopId}</p>
         )}
         {shopInfo && (
           <div>
