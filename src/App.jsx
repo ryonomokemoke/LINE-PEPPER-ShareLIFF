@@ -34,12 +34,11 @@ function App() {
   
   const fetchShopInfo = (shopId) => {
     
-    const url = "https://line-pepper.ngrok.io/shop_info?shop_id=" + shopId;
+    // const url = "https://line-pepper.ngrok.io/shop_info?shop_id=" + shopId;
+    const url = "https://new-laws-heal.loca.lt/shop_info?shop_id=" + shopId;
     alert(url);
     // https://0b6ca0b68086.ngrok.app/shop_info?shop_id=J000650960
-    axios.get(url, {headers: {
-      "ngrok-skip-browser-warning": "69420"
-    }})
+    axios.get(url)
       .then(response => {
         if (!response.name) {
           alert('Empty response received');
