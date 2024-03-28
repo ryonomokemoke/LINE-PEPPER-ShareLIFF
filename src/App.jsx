@@ -33,22 +33,18 @@ function App() {
   };
   
   const fetchShopInfo = (shopId) => {
-    const url = "https://62da9f8e44ec.ngrok.app/shop_info?shop_id=" + shopId;
-    axios.get(url)
-      .then(response => {
-        if (!response.data) {
-          alert('Empty response received');
-        } else if (!response.data.name) {
-          alert('Name not found in response');
-        } else {
-          alert(`get response: ${response.data.name}`);
-          setShopInfo(response.data); // shopInfoをresponse.dataで更新
+    const url = "https://62da9f8e44ec.ngrok.app/shop_info/";
+    try {
+      const response = await axios.get(url, {
+        param: {
+          shop_id: shopId
         }
-      })
-      .catch(error => {
-        setError(`Error fetching shop info: ${error.message}`);
       });
-  };
+      alert(response.data);
+    } catch (error) {
+      setError(error)
+      alert(error)
+    }
 
   return (
     <>
