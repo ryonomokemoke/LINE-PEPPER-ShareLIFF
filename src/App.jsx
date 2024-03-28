@@ -66,8 +66,7 @@ function App() {
         {shopInfo && (
           <div>
             <h2>Shop Information</h2>
-            <p>Name: {shopInfo.name}</p>
-            <p>{data.name}</p>
+            {/* <p>Name: {shopInfo.name}</p> */}
             {/* 他の情報を表示 */}
           </div>
         )}
