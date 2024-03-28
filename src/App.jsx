@@ -43,7 +43,7 @@ function App() {
         if (!response.name) {
           alert('Empty response received');
         }
-        alert(`get response: ${response.data}`)
+        alert(`get response: ${response}`)
         setShopInfo(response); // shopInfoをresponse.dataで更新
       })
       .catch(error => {
