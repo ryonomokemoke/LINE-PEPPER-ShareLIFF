@@ -33,27 +33,17 @@ function App() {
   };
   
   const fetchShopInfo = (shopId) => {
-    
-    // const url = "https://line-pepper.ngrok.io/shop_info?shop_id=" + shopId;
     const url = "https://62da9f8e44ec.ngrok.app/shop_info/" + shopId;
-    // alert(url);
-    // fetch(url, {
-    //   method: "get",
-    //   headers: new Headers({
-    //     "ngrok-skip-browser-warning": "69420",
-    //   }),
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => alert(data.name))
-    //   .catch((err) => alert(error));
-    // https://0b6ca0b68086.ngrok.app/shop_info?shop_id=J000650960
     axios.get(url)
       .then(response => {
-        if (!response.name) {
+        if (!response.data) {
           alert('Empty response received');
+        } else if (!response.data.name) {
+          alert('Name not found in response');
+        } else {
+          alert(`get response: ${response.data.name}`);
+          setShopInfo(response.data); // shopInfoをresponse.dataで更新
         }
-        alert(`get response: ${response}`)
-        setShopInfo(response); // shopInfoをresponse.dataで更新
       })
       .catch(error => {
         setError(`Error fetching shop info: ${error.message}`);
