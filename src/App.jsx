@@ -36,28 +36,28 @@ function App() {
     
     // const url = "https://line-pepper.ngrok.io/shop_info?shop_id=" + shopId;
     const url = "https://62da9f8e44ec.ngrok.app/shop_info/" + shopId;
-    alert(url);
-    fetch(url, {
-      method: "get",
-      headers: new Headers({
-        "ngrok-skip-browser-warning": "69420",
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => alert(data.name))
-      .catch((err) => alert(error));
+    // alert(url);
+    // fetch(url, {
+    //   method: "get",
+    //   headers: new Headers({
+    //     "ngrok-skip-browser-warning": "69420",
+    //   }),
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => alert(data.name))
+    //   .catch((err) => alert(error));
     // https://0b6ca0b68086.ngrok.app/shop_info?shop_id=J000650960
-    // axios.get(url)
-    //   .then(response => {
-    //     if (!response.name) {
-    //       alert('Empty response received');
-    //     }
-    //     alert(`get response: ${response}`)
-    //     setShopInfo(response); // shopInfoをresponse.dataで更新
-    //   })
-    //   .catch(error => {
-    //     setError(`Error fetching shop info: ${error.message}`);
-    //   });
+    axios.get(url)
+      .then(response => {
+        if (!response.name) {
+          alert('Empty response received');
+        }
+        alert(`get response: ${response}`)
+        setShopInfo(response); // shopInfoをresponse.dataで更新
+      })
+      .catch(error => {
+        setError(`Error fetching shop info: ${error.message}`);
+      });
   };
 
   return (
