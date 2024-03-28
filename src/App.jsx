@@ -37,19 +37,28 @@ function App() {
     // const url = "https://line-pepper.ngrok.io/shop_info?shop_id=" + shopId;
     const url = "https://05e4261c3e41.ngrok.app/shop_info?shop_id=" + shopId;
     alert(url);
+    fetch(url, {
+      method: "get",
+      headers: new Headers({
+        "ngrok-skip-browser-warning": "69420",
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.log(error));
     // https://0b6ca0b68086.ngrok.app/shop_info?shop_id=J000650960
-    axios.get(url)
-      .then(response => {
-        if (!response.name) {
-          alert('Empty response received');
-        }
-        alert(`get response: ${response}`)
-        setShopInfo(response); // shopInfoをresponse.dataで更新
-      })
-      .catch(error => {
-        setError(`Error fetching shop info: ${error.message}`);
-      });
-  };
+  //   axios.get(url)
+  //     .then(response => {
+  //       if (!response.name) {
+  //         alert('Empty response received');
+  //       }
+  //       alert(`get response: ${response}`)
+  //       setShopInfo(response); // shopInfoをresponse.dataで更新
+  //     })
+  //     .catch(error => {
+  //       setError(`Error fetching shop info: ${error.message}`);
+  //     });
+  // };
 
   return (
     <>
@@ -66,8 +75,8 @@ function App() {
         {shopInfo && (
           <div>
             <h2>Shop Information</h2>
-            <p>Name: {shopInfo.name}</p>
-            <p>{shopInfo}</p>
+            {/* <p>Name: {shopInfo.name}</p> */}
+            <p>{data.name}</p>
             {/* 他の情報を表示 */}
           </div>
         )}
