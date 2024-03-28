@@ -23,6 +23,7 @@ function App() {
         // LIFF初期化後、URLからshop_idを取得
         const params = new URLSearchParams(window.location.search);
         const shopId = params.get('shop_id');
+        alert(shopId)
         fetchShopInfo(shopId); // fetchShopInfoを呼び出し
       })
       .catch((error) => {
