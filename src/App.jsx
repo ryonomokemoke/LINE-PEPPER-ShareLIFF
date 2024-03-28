@@ -35,7 +35,7 @@ function App() {
   const fetchShopInfo = (shopId) => {
     
     // const url = "https://line-pepper.ngrok.io/shop_info?shop_id=" + shopId;
-    const url = "05e4261c3e41.ngrok.app/shop_info?shop_id=" + shopId;
+    const url = "https://05e4261c3e41.ngrok.app/shop_info?shop_id=" + shopId;
     alert(url);
     // https://0b6ca0b68086.ngrok.app/shop_info?shop_id=J000650960
     axios.get(url)
