@@ -33,8 +33,7 @@ function App() {
   };
   
   const fetchShopInfo = (shopId) => {
-    alert("https://62da9f8e44ec.ngrok.app/shop_info/" + shopId);
-    const url = "https://62da9f8e44ec.ngrok.app/shop_info/" + shopId;
+    const url = "https://62da9f8e44ec.ngrok.app/shop_info?shop_id=" + shopId;
     axios.get(url)
       .then(response => {
         if (!response.data) {
