@@ -35,7 +35,7 @@ function App() {
   const fetchShopInfo = (shopId) => {
     
     // const url = "https://line-pepper.ngrok.io/shop_info?shop_id=" + shopId;
-    const url = "https://05e4261c3e41.ngrok.app/shop_info?shop_id=" + shopId;
+    const url = "https://62da9f8e44ec.ngrok.app/shop_info/" + shopId;
     alert(url);
     fetch(url, {
       method: "get",
@@ -44,8 +44,8 @@ function App() {
       }),
     })
       .then((response) => response.json())
-      .then((data) => console.log(data))
-      .catch((err) => console.log(error));
+      .then((data) => alert(data.name))
+      .catch((err) => alert(error));
     // https://0b6ca0b68086.ngrok.app/shop_info?shop_id=J000650960
     // axios.get(url)
     //   .then(response => {
