@@ -24,7 +24,7 @@ function App() {
         const params = new URLSearchParams(window.location.search);
         setShopId(params.get('shop_id'));
         alert(shopId);
-        responseData = fetchShopInfo(shopId); // fetchShopInfoを呼び出し
+        const responseData = await fetchShopInfo(shopId); // fetchShopInfoを呼び出し
 
         setShopInfo(responseData);
       })
@@ -35,13 +35,13 @@ function App() {
       });
   };
   
-  const fetchShopInfo = async (shopId) => {
+  const fetchShopInfo = (shopId) => {
     alert(shopId)
     // const url = "https://62da9f8e44ec.ngrok.app/shop_info?shop_id=" + shopId;
     const url = "https://62da9f8e44ec.ngrok.app/shop_info/" + shopId;
 
     try {
-        const response = await axios.get(url, { headers: {
+        const response = axios.get(url, { headers: {
                 "ngrok-skip-browser-warning": "69420"
         }});
 
@@ -49,7 +49,7 @@ function App() {
             throw new Error('Network response was not ok');
         }
 
-        const data = await response.json();
+        const data = response.json();
         return data;
     } catch (error) {
         console.error('Error fetching shop info:', error);
