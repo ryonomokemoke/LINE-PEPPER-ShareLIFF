@@ -23,9 +23,8 @@ function App() {
         // LIFF初期化後、URLからshop_idを取得
         const params = new URLSearchParams(window.location.search);
         setShopId(params.get('shop_id'));
-
-        responseData = fetchShopInfo(shopId); // fetchShopInfoを呼び出し
         alert(shopId);
+        responseData = fetchShopInfo(shopId); // fetchShopInfoを呼び出し
 
         setShopInfo(responseData);
       })
@@ -37,6 +36,7 @@ function App() {
   };
   
   const fetchShopInfo = async (shopId) => {
+    alert(shopId)
     // const url = "https://62da9f8e44ec.ngrok.app/shop_info?shop_id=" + shopId;
     const url = "https://62da9f8e44ec.ngrok.app/shop_info/" + shopId;
 
