@@ -24,10 +24,9 @@ function App() {
       const params = new URLSearchParams(window.location.search);
       const shopId = params.get('shop_id');
       setShopId(shopId);
-      alert(shopId);
-      const responseData = await fetchShopInfo(shopId); // fetchShopInfoを呼び出し
-      setResponseDataView(responseData);
-      setShopInfo(responseData);
+      const shopInfo = await fetchShopInfo(shopId); // fetchShopInfoを呼び出し json形式で取得
+      const shareCarousel = createCarouselMessage(shopInfo);
+      shareMessage(shareCarousel);
 
 
     } catch (error) {
@@ -36,7 +35,66 @@ function App() {
       alert(error);
     }
   };
+
+  const shareMessage = async (message) => {
+    liff.shareTargetPicker([message])
+        .then(() => {
+            // 共有が完了したらウィンドウを閉じる
+            liff.closeWindow();
+        })
+        .catch((error) => {
+            console.error('Failed to send message', error);
+        }
+    );
+  }
+
+  const createCarouselMessage = async (responseJson) => {
+    // カルーセルメッセージの内容を設定
+    carouselMessage = {
+      type: "template",
+      altText: "こちらのお店はどうでしょう",
+      template: {
+        type: "carousel",
+        columns: [
+          {
+            thumbnailImageUrl: responseJson.pic_url,
+            title: responseJson.title,
+            text: responseJson.review,
+            defaultAction: {
+              type: "uri",
+              label: "店舗URL",
+              uri:  getAffiliateUrl(responseJson.shop_id)
+            },
+            actions: [
+              {
+                type: "uri",
+                label: "詳しく見る",
+                uri:  getAffiliateUrl(responseJson.shop_id)
+              },
+              {
+                type: "uri",
+                label: "このお店を共有する",
+                uri: "https://liff.line.me/2000472699-9WJ36mXE" + "?" + responseJson.shop_id
+              }
+            ]
+          }
+        ],
+        imageAspectRatio: "rectangle",
+        imageSize: "cover"
+      }
+    }
+  }
+
+
+  function getAffiliateUrl(shop_id){
+
+    const affiliate_url_top = "https://ck.jp.ap.valuecommerce.com/servlet/referral?sid=3690883&pid=889260573&vc_url=https%3A%2F%2Fwww.hotpepper.jp%2Fstr"
+    const affiliate_url_bottom = "%2F%3Fvos%3Dnhppvccp99002"
+
+    return affiliate_url_top + shop_id + affiliate_url_bottom
+  }
   
+
   const fetchShopInfo = async (shopId) => {
     try {
       const url = "https://62da9f8e44ec.ngrok.app/shop_info?shop_id=" + shopId;
@@ -48,9 +106,8 @@ function App() {
       if (response.status !== 200) {
         throw new Error('Network response was not ok');
       }
-      const data = response.data;
-      alert(data)
-      return data;
+      return response;
+
     } catch (error) {
       console.error('Error fetching shop info:', error);
       throw error;
@@ -73,7 +130,6 @@ function App() {
           <div>
             <h2>Shop Information</h2>
             <pre>{JSON.stringify(shopInfo, null, 2)}</pre>
-            <p>{responseDataView}</p>
             <p>Name: {shopInfo.name}</p>
             {/* 他の情報を表示 */}
           </div>
