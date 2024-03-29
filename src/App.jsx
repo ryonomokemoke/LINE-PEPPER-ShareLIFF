@@ -49,6 +49,13 @@ function App() {
   }
 
   const createCarouselMessage = async (responseJson) => {
+    alert(responseJson.img_url)
+    alert(responseJson.name)
+    alert(responseJson.access)
+    alert(responseJson.shop_id)
+    alert(responseJson.affiliate_url)
+
+
     // カルーセルメッセージの内容を設定
     const carouselMessage = {
       type: "template",
@@ -63,13 +70,13 @@ function App() {
             defaultAction: {
               type: "uri",
               label: "店舗URL",
-              uri:  getAffiliateUrl(responseJson.shop_id)
+              uri: responseJson.affiliate_url
             },
             actions: [
               {
                 type: "uri",
                 label: "詳しく見る",
-                uri:  getAffiliateUrl(responseJson.shop_id)
+                uri: responseJson.affiliate_url
               },
               {
                 type: "uri",
@@ -88,7 +95,7 @@ function App() {
   }
 
 
-  function getAffiliateUrl(shop_id){
+  const getAffiliateUrl = async (shop_id) => {
 
     const affiliate_url_top = "https://ck.jp.ap.valuecommerce.com/servlet/referral?sid=3690883&pid=889260573&vc_url=https%3A%2F%2Fwww.hotpepper.jp%2Fstr"
     const affiliate_url_bottom = "%2F%3Fvos%3Dnhppvccp99002"
