@@ -36,14 +36,13 @@ function App() {
   };
   
   const fetchShopInfo = async (shopId) => {
-    const url = "https://62da9f8e44ec.ngrok.app/shop_info?shop_id=" + shopId;
+    // const url = "https://62da9f8e44ec.ngrok.app/shop_info?shop_id=" + shopId;
+    const url = "https://62da9f8e44ec.ngrok.app/shop_info/" + shopId;
 
     try {
-        const response = await axios.get(url, {
-            headers: {
-                "ngrok-skip-browser-warning": "true"
-            }
-        });
+        const response = await axios.get(url, { headers: {
+                "ngrok-skip-browser-warning": "69420"
+        }});
 
         if (!response.ok) {
             throw new Error('Network response was not ok');
