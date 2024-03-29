@@ -67,7 +67,8 @@ function App() {
         {shopInfo && (
           <div>
             <h2>Shop Information</h2>
-            <p>Name: {shopInfo.name}</p>
+            <pre>{JSON.stringify(shopInfo, null, 2)}</pre>
+            {/* <p>Name: {shopInfo.name}</p> */}
             {/* 他の情報を表示 */}
           </div>
         )}
