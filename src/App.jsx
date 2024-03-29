@@ -33,20 +33,27 @@ function App() {
       });
   };
   
-  const fetchShopInfo = async(shopId) => {
-    const url = "https://62da9f8e44ec.ngrok.app/shop_info/";
+  const fetchShopInfo = async (shopId) => {
+    const url = "https://62da9f8e44ec.ngrok.app/shop_info?shop_id=" + shopId;
+
     try {
-      const response = await axios.get(url, {
-        param: {
-          shop_id: shopId
+        const response = await fetch(url, {
+            headers: {
+                "ngrok-skip-browser-warning": "true"
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
         }
-      });
-      alert(response.data);
+
+        const data = await response.json();
+        return data;
     } catch (error) {
-      setError(error);
-      alert(error);
+        console.error('Error fetching shop info:', error);
+        throw error;
     }
-  };
+};
 
   return (
     <>
