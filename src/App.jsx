@@ -43,7 +43,7 @@ function App() {
             liff.closeWindow();
         })
         .catch((error) => {
-            console.error('Failed to send message', error);
+            alert('Failed to send message', error);
         }
     );
   }
@@ -83,7 +83,7 @@ function App() {
         imageSize: "cover"
       }
     }
-    alert("a")
+    alert(carouselMessage)
     return carouselMessage
   }
 
