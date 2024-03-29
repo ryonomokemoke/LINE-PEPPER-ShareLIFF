@@ -45,6 +45,7 @@ function App() {
         throw new Error('Network response was not ok');
       }
       const data = response.data;
+      alert(data)
       return data;
     } catch (error) {
       console.error('Error fetching shop info:', error);
