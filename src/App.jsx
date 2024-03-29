@@ -26,6 +26,7 @@ function App() {
       setShopId(shopId1);
       const shopInfo1 = await fetchShopInfo(shopId1); // fetchShopInfoを呼び出し json形式で取得
       setShopInfo(shopInfo1);
+      alert("shopInfo: " + shopInfo)
       const shareCarousel = await createCarouselMessage(shopInfo1);
       shareMessage(shareCarousel);
 
@@ -109,7 +110,7 @@ function App() {
         throw new Error('Network response was not ok');
       }
       alert("reesponse.data: " + response.data)
-      return response.data;
+      return response.data; // {'id': None, 'shop_id': 'J001089684', 'name': 'まぐろ一代 エキュート上野店', 'img_url': 'https://imgfp.hotp.jp/IMGH/83/20/P041798320/P041798320_238.jpg', 'access': ' JR東日本 山手線 上野駅 構内 3F  上野駅から125m', 'affiliate_url': 'https://ck.jp.ap.valuecommerce.com/servlet/referral?sid=3690883&pid=889260573&vc_url=https%3A%2F%2Fwww.hotpepper.jp%2FstrJ001089684%2F%3Fvos%3Dnhppvccp99002', 'review_score': None, 'review_quantity': None}
 
     } catch (error) {
       alert('Error fetching shop info:', error);
