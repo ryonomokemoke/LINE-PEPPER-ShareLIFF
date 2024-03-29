@@ -25,6 +25,7 @@ function App() {
       const shopId1 = params.get('shop_id');
       setShopId(shopId1);
       const shopInfo1 = await fetchShopInfo(shopId1); // fetchShopInfoを呼び出し json形式で取得
+      setShopInfo(shopInfo1);
       const shareCarousel = await createCarouselMessage(shopInfo1);
       shareMessage(shareCarousel);
 
@@ -94,15 +95,6 @@ function App() {
     alert(carouselMessage)
     return carouselMessage
   }
-
-
-  const getAffiliateUrl = async (shop_id) => {
-
-    const affiliate_url_top = "https://ck.jp.ap.valuecommerce.com/servlet/referral?sid=3690883&pid=889260573&vc_url=https%3A%2F%2Fwww.hotpepper.jp%2Fstr"
-    const affiliate_url_bottom = "%2F%3Fvos%3Dnhppvccp99002"
-
-    return affiliate_url_top + shop_id + affiliate_url_bottom
-  }
   
 
   const fetchShopInfo = async (shopId) => {
@@ -120,7 +112,7 @@ function App() {
       return response;
 
     } catch (error) {
-      console.error('Error fetching shop info:', error);
+      alert('Error fetching shop info:', error);
       throw error;
     }
   };
