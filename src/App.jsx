@@ -7,6 +7,7 @@ import axios from 'axios';
 function App() {
   const [error, setError] = useState("");
   const [shopId, setShopId] = useState("");
+  const [responseDataView, setResponseDataView] = useState(null);
   const [shopInfo, setShopInfo] = useState(null);
 
   useEffect(() => {
@@ -25,7 +26,10 @@ function App() {
       setShopId(shopId);
       alert(shopId);
       const responseData = await fetchShopInfo(shopId); // fetchShopInfoを呼び出し
+      setResponseDataView(responseData);
       setShopInfo(responseData);
+
+
     } catch (error) {
       alert("LIFF init failed.");
       setError(`${error}`);
@@ -69,6 +73,7 @@ function App() {
           <div>
             <h2>Shop Information</h2>
             <pre>{JSON.stringify(shopInfo, null, 2)}</pre>
+            <p>{responseDataView}</p>
             <p>Name: {shopInfo.name}</p>
             {/* 他の情報を表示 */}
           </div>
