@@ -57,9 +57,9 @@ function App() {
         type: "carousel",
         columns: [
           {
-            thumbnailImageUrl: responseJson.pic_url,
-            title: responseJson.title,
-            text: responseJson.review,
+            thumbnailImageUrl: responseJson.img_url,
+            title: responseJson.name,
+            text: responseJson.access,
             defaultAction: {
               type: "uri",
               label: "店舗URL",
