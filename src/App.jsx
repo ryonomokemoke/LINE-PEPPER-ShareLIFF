@@ -22,13 +22,10 @@ function App() {
       alert("LIFF init succeeded.");
       // LIFF初期化後、URLからshop_idを取得
       const params = new URLSearchParams(window.location.search);
-      
-      setShopId(params.get('shop_id'));
-      const fetchedShopInfo =  await fetchShopInfo(shopId); // fetchShopInfoを呼び出し json形式で取得
-      setShopInfo(fetchedShopInfo);
-
-      alert("name" + shopInfo.name)
-      const shareCarousel = await createCarouselMessage(shopInfo);
+      const shopId1 = params.get('shop_id');
+      setShopId(shopId1);
+      const shopInfo1 = await fetchShopInfo(shopId1); // fetchShopInfoを呼び出し json形式で取得
+      const shareCarousel = await createCarouselMessage(shopInfo1);
       shareMessage(shareCarousel);
 
 
@@ -44,6 +41,7 @@ function App() {
         .then(() => {
             // 共有が完了したらウィンドウを閉じる
             // liff.closeWindow();
+            console.log("")
         })
         .catch((error) => {
             alert('Failed to send message', error);
@@ -53,10 +51,10 @@ function App() {
 
   const createCarouselMessage = async (responseJson) => {
     alert(responseJson.img_url)
-    alert(responseJson.name)
-    alert(responseJson.access)
-    alert(responseJson.shop_id)
-    alert(responseJson.affiliate_url)
+    // alert(responseJson.name)
+    // alert(responseJson.access)
+    // alert(responseJson.shop_id)
+    // alert(responseJson.shop_id)
 
 
     // カルーセルメッセージの内容を設定
@@ -118,7 +116,7 @@ function App() {
       if (response.status !== 200) {
         throw new Error('Network response was not ok');
       }
-      return response; // {'id': None, 'shop_id': 'J000748282', 'name': '魚の飯 調布', 'img_url': 'https://imgfp.hotp.jp/IMGH/26/83/P036812683/P036812683_238.jpg', 'access': '駅近好ｱｸｾｽ/2時間飲み放題付きﾌﾟﾗﾝ3500円～', 'affiliate_url': 'https://ck.jp.ap.valuecommerce.com/servlet/referral?sid=3690883&pid=889260573&vc_url=https%3A%2F%2Fwww.hotpepper.jp%2FstrJ000748282%2F%3Fvos%3Dnhppvccp99002', 'review_score': 4.3, 'review_quantity': 24}
+      return response;
 
     } catch (error) {
       console.error('Error fetching shop info:', error);
