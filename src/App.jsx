@@ -35,27 +35,32 @@ function App() {
       });
   };
   
-  const fetchShopInfo = (shopId) => {
+  function fetchShopInfo(shopId) {
     alert(shopId)
-    // const url = "https://62da9f8e44ec.ngrok.app/shop_info?shop_id=" + shopId;
-    const url = "https://62da9f8e44ec.ngrok.app/shop_info/" + shopId;
+    const url = "https://62da9f8e44ec.ngrok.app/shop_info?shop_id=" + shopId;
+    // const url = "https://62da9f8e44ec.ngrok.app/shop_info/" + shopId;
+    axios.get(url, { headers: {
+      "ngrok-skip-browser-warning": "69420"
+    }})
+    .then(response => {
+      alert(response.name)
+    });
+  }
+    
+//     try {
+//         const response = 
 
-    try {
-        const response = axios.get(url, { headers: {
-                "ngrok-skip-browser-warning": "69420"
-        }});
+//         if (!response.ok) {
+//             throw new Error('Network response was not ok');
+//         }
 
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-
-        const data = response.json();
-        return data;
-    } catch (error) {
-        console.error('Error fetching shop info:', error);
-        throw error;
-    }
-};
+//         const data = response.json();
+//         return data;
+//     } catch (error) {
+//         console.error('Error fetching shop info:', error);
+//         throw error;
+//     }
+// };
 
   return (
     <>
