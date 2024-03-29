@@ -22,9 +22,12 @@ function App() {
       alert("LIFF init succeeded.");
       // LIFF初期化後、URLからshop_idを取得
       const params = new URLSearchParams(window.location.search);
+      
       setShopId(params.get('shop_id'));
-      setShopInfo(await fetchShopInfo(shopId)); // fetchShopInfoを呼び出し json形式で取得
-      alert(shopInfo.name)
+      const fetchedShopInfo =  await fetchShopInfo(shopId); // fetchShopInfoを呼び出し json形式で取得
+      setShopInfo(fetchedShopInfo);
+
+      alert("name" + shopInfo.name)
       const shareCarousel = await createCarouselMessage(shopInfo);
       shareMessage(shareCarousel);
 
@@ -40,7 +43,7 @@ function App() {
     liff.shareTargetPicker([message])
         .then(() => {
             // 共有が完了したらウィンドウを閉じる
-            liff.closeWindow();
+            // liff.closeWindow();
         })
         .catch((error) => {
             alert('Failed to send message', error);
@@ -115,7 +118,7 @@ function App() {
       if (response.status !== 200) {
         throw new Error('Network response was not ok');
       }
-      return response;
+      return response; // {'id': None, 'shop_id': 'J000748282', 'name': '魚の飯 調布', 'img_url': 'https://imgfp.hotp.jp/IMGH/26/83/P036812683/P036812683_238.jpg', 'access': '駅近好ｱｸｾｽ/2時間飲み放題付きﾌﾟﾗﾝ3500円～', 'affiliate_url': 'https://ck.jp.ap.valuecommerce.com/servlet/referral?sid=3690883&pid=889260573&vc_url=https%3A%2F%2Fwww.hotpepper.jp%2FstrJ000748282%2F%3Fvos%3Dnhppvccp99002', 'review_score': 4.3, 'review_quantity': 24}
 
     } catch (error) {
       console.error('Error fetching shop info:', error);
