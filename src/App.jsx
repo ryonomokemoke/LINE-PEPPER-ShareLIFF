@@ -25,7 +25,7 @@ function App() {
         setShopId(params.get('shop_id'));
 
         responseData = fetchShopInfo(shopId); // fetchShopInfoを呼び出し
-        alert(shopId;
+        alert(shopId);
 
         setShopInfo(responseData);
       })
