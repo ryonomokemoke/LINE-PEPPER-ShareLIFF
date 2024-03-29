@@ -22,9 +22,10 @@ function App() {
         alert("LIFF init succeeded.");
         // LIFF初期化後、URLからshop_idを取得
         const params = new URLSearchParams(window.location.search);
-        const shopId = params.get('shop_id');
-        alert(shopId)
-        fetchShopInfo(shopId); // fetchShopInfoを呼び出し
+        setShopId(params.get('shop_id'));
+        alert(shopId);
+        responseData = fetchShopInfo(shopId); // fetchShopInfoを呼び出し
+        setShopInfo(responseData);
       })
       .catch((error) => {
         alert("LIFF init failed.");
