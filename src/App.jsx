@@ -39,7 +39,7 @@ function App() {
     const url = "https://62da9f8e44ec.ngrok.app/shop_info?shop_id=" + shopId;
 
     try {
-        const response = await fetch(url, {
+        const response = await axios.get(url, {
             headers: {
                 "ngrok-skip-browser-warning": "true"
             }
