@@ -25,6 +25,7 @@ function App() {
       const shopId = params.get('shop_id');
       setShopId(shopId);
       const shopInfo = await fetchShopInfo(shopId); // fetchShopInfoを呼び出し json形式で取得
+      alert(shopInfo.name)
       const shareCarousel = await createCarouselMessage(shopInfo);
       shareMessage(shareCarousel);
 
