@@ -22,9 +22,8 @@ function App() {
       alert("LIFF init succeeded.");
       // LIFF初期化後、URLからshop_idを取得
       const params = new URLSearchParams(window.location.search);
-      const shopId = params.get('shop_id');
-      setShopId(shopId);
-      const shopInfo = await fetchShopInfo(shopId); // fetchShopInfoを呼び出し json形式で取得
+      setShopId(params.get('shop_id'));
+      setShopInfo(await fetchShopInfo(shopId)); // fetchShopInfoを呼び出し json形式で取得
       alert(shopInfo.name)
       const shareCarousel = await createCarouselMessage(shopInfo);
       shareMessage(shareCarousel);
