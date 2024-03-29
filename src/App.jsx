@@ -108,7 +108,7 @@ function App() {
       if (response.status !== 200) {
         throw new Error('Network response was not ok');
       }
-      alert(response)
+      alert("reesponse.date: " + response.date)
       return response;
 
     } catch (error) {
