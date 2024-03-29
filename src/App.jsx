@@ -50,7 +50,7 @@ function App() {
 
   const createCarouselMessage = async (responseJson) => {
     // カルーセルメッセージの内容を設定
-    carouselMessage = {
+    const carouselMessage = {
       type: "template",
       altText: "こちらのお店はどうでしょう",
       template: {
