@@ -68,7 +68,7 @@ function App() {
           <div>
             <h2>Shop Information</h2>
             <pre>{JSON.stringify(shopInfo, null, 2)}</pre>
-            {/* <p>Name: {shopInfo.name}</p> */}
+            <p>Name: {shopInfo.name}</p>
             {/* 他の情報を表示 */}
           </div>
         )}
