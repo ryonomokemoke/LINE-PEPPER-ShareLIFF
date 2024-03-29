@@ -83,6 +83,8 @@ function App() {
         imageSize: "cover"
       }
     }
+    alert(carouselMessage)
+    return carouselMessage
   }
 
 
