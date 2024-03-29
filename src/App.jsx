@@ -116,6 +116,7 @@ function App() {
       if (response.status !== 200) {
         throw new Error('Network response was not ok');
       }
+      alert(response)
       return response;
 
     } catch (error) {
