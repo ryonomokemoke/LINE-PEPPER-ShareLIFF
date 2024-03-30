@@ -14,68 +14,35 @@ function App() {
     initializeLIFF();
   }, []);
 
-  
   const initializeLIFF = async () => {
     try {
       await liff.init({
         liffId: import.meta.env.VITE_LIFF_ID // ローカルではこっち
       });
       alert("LIFF init succeeded.");
-      // ログイン状態をチェックし、ログインしていなければログインする
-      if (!liff.isLoggedIn()) {
-        liff.login();
-        return;
-      }
-      // ログイン後の処理を実行
-      await handleLoggedIn();
+      // LIFF初期化後、URLからshop_idを取得
+      const params = new URLSearchParams(window.location.search);
+      const shopIdFromParams = params.get('shop_id');
+      setShopId(shopIdFromParams); // 
+      
+      const shopInfoResponse = await fetchShopInfo(shopId);
+      setShopInfo(shopInfoResponse); // 取得したデータをshopInfoに設定
+      
+      // const shopInfo1 = await fetchShopInfo(shopId1); // fetchShopInfoを呼び出し json形式で取得
+      // alert("shopInfo1" + shopInfo1); // jsonきてる
+      // useEffect(() =>  {
+      //   setShopInfo(shopInfo1);
+      // }, [shopInfo1]);
+
+      alert("shopInfo: " + shopInfo); //null
+      const shareCarousel = await createCarouselMessage(shopInfo);
+      shareMessage(shareCarousel);
+
+
     } catch (error) {
       alert("LIFF init failed.");
       setError(`${error}`);
       alert(error);
-    }
-  };
-  
-  const handleLoggedIn = async () => {
-    try {
-      // LIFF初期化後、URLからshop_idを取得
-      const params = new URLSearchParams(window.location.search);
-      const shopIdFromParams = params.get('shop_id');
-
-      fetchShopInfo(shopIdFromParams)
-        .then((response) => {
-          setShopInfo(response, () => {
-            alert("shopInfo: " + shopInfo); // jump            
-          });
-        })
-        .catch((error) => {
-          alert('Error fetching shop info:', error);
-        });
-
-      // alert("shopInfoResponse: " + shopInfoResponse);
-      // setShopInfo(shopInfoResponse);
-      // alert("shopInfo: " + shopInfo); // jump
-
-      if (shopIdFromParams) {
-        // shop_idが存在する場合のみ処理を続行
-        await handleShopInfo(shopIdFromParams);
-      }
-    } catch (error) {
-      console.error('Error handling logged in:', error);
-      throw error;
-    }
-  };
-
-  const handleShopInfo = async (shopIdFromParams) => {
-    try {
-      setShopInfo(fetchShopInfo(shopIdFromParams));
-      // カルーセルメッセージを生成
-      const carouselMessage = await createCarouselMessage(shopInfo);
-      // カルーセルメッセージを送信
-      shareMessage(carouselMessage); // jump
-      
-    } catch (error) {
-      console.error('Error handling shop info:', error);
-      throw error;
     }
   };
 
@@ -139,10 +106,10 @@ function App() {
   }
   
 
-  const fetchShopInfo = async(shopId) => {
+  const fetchShopInfo = async (shopId) => {
     try {
       const url = "https://62da9f8e44ec.ngrok.app/shop_info?shop_id=" + shopId;
-      const response = axios.get(url, {
+      const response = await axios.get(url, {
         headers: {
           "ngrok-skip-browser-warning": "69420"
         }
