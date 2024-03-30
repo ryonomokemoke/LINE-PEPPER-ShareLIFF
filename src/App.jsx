@@ -56,7 +56,7 @@ function App() {
     try {
       setShopInfo(fetchShopInfo(shopIdFromParams));
       // カルーセルメッセージを生成
-      const carouselMessage = await createCarouselMessage(shopInfoResponse);
+      const carouselMessage = await createCarouselMessage(shopInfo);
       // カルーセルメッセージを送信
       shareMessage(carouselMessage);
       
