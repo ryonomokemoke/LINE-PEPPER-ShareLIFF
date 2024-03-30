@@ -52,14 +52,6 @@ function App() {
 
   const createCarouselMessage = async (response) => {
     const responseJson = JSON.parse(response)
-    alert("responseJson: " + responseJson)
-    alert("responseJson['name']: " + responseJson['name'])
-
-    // alert(responseJson.name)
-    // alert(responseJson.access)
-    // alert(responseJson.shop_id)
-    // alert(responseJson.shop_id)
-
 
     // カルーセルメッセージの内容を設定
     const carouselMessage = {
