@@ -24,7 +24,7 @@ function App() {
       const params = new URLSearchParams(window.location.search);
       const shopIdFromParams = params.get('shop_id');
       setShopId(shopIdFromParams); // 
-      alert(shop_id);
+      alert(shopId);
       const shopInfoResponse = await fetchShopInfo(shopId);
       setShopInfo(shopInfoResponse); // 取得したデータをshopInfoに設定
       
