@@ -42,6 +42,7 @@ function App() {
       const shopIdFromParams = params.get('shop_id');
       setShopId(shopIdFromParams);
       const shopInfoResponse = await fetchShopInfo(shopIdFromParams);
+      alert("shopInfoResponse: " + shopInfoResponse);
       setShopInfo(shopInfoResponse);
       alert("shopInfo: " + shopInfo);
 
