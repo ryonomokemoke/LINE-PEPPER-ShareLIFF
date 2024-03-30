@@ -52,6 +52,20 @@ function App() {
     }
   };
 
+  const handleShopInfo = async (shopIdFromParams) => {
+    try {
+      setShopInfo(fetchShopInfo(shopIdFromParams));
+      // カルーセルメッセージを生成
+      const carouselMessage = await createCarouselMessage(shopInfoResponse);
+      // カルーセルメッセージを送信
+      shareMessage(carouselMessage);
+      
+    } catch (error) {
+      console.error('Error handling shop info:', error);
+      throw error;
+    }
+  };
+
   const shareMessage = async (message) => {
     liff.shareTargetPicker([message])
         .then(() => {
