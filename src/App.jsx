@@ -42,7 +42,7 @@ function App() {
       const shopIdFromParams = params.get('shop_id');
       setShopId(shopIdFromParams);
       const shopInfoResponse = await fetchShopInfo(shopIdFromParams);
-      setShopInfo(fetchShopInfo(shopInfoResponse));
+      setShopInfo(shopInfoResponse);
       
       if (shopIdFromParams) {
         // shop_idが存在する場合のみ処理を続行
