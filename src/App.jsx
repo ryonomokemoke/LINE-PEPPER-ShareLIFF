@@ -48,7 +48,7 @@ function App() {
           });
         })
         .catch((error) => {
-          console.error('Error fetching shop info:', error);
+          alert('Error fetching shop info:', error);
         });
 
       // alert("shopInfoResponse: " + shopInfoResponse);
