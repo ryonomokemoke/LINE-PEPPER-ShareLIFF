@@ -51,7 +51,7 @@ function App() {
   }
 
   const createCarouselMessage = async (response) => {
-    const responseJson = JSON.parse(response)
+    const responseJson = JSON.parse(response) // responseが文字列できちゃってるっぽいからjson
 
     // カルーセルメッセージの内容を設定
     const carouselMessage = {
@@ -78,7 +78,7 @@ function App() {
               {
                 type: "uri",
                 label: "このお店を共有する",
-                uri: "https://liff.line.me/2000472699-9WJ36mXE" + "?" + responseJson.shop_id
+                uri: "https://liff.line.me/2000472699-9WJ36mXE" + "/shop_info?shop_id=" + responseJson.shop_id
               }
             ]
           }
