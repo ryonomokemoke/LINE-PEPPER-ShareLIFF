@@ -14,28 +14,41 @@ function App() {
     initializeLIFF();
   }, []);
 
+  
   const initializeLIFF = async () => {
     try {
       await liff.init({
         liffId: import.meta.env.VITE_LIFF_ID // ローカルではこっち
       });
       alert("LIFF init succeeded.");
-      // LIFF初期化後、URLからshop_idを取得
-      const params = new URLSearchParams(window.location.search);
-      const shopId1 = params.get('shop_id');
-      setShopId(shopId1);
-      const shopInfo1 = await fetchShopInfo(shopId1); // fetchShopInfoを呼び出し json形式で取得
-      alert("shopInfo1" + shopInfo1);
-      setShopInfo(shopInfo1);
-      alert("shopInfo: " + shopInfo);
-      const shareCarousel = await createCarouselMessage(shopInfo1);
-      shareMessage(shareCarousel);
-
-
+      // ログイン状態をチェックし、ログインしていなければログインする
+      if (!liff.isLoggedIn()) {
+        liff.login();
+        return;
+      }
+      // ログイン後の処理を実行
+      await handleLoggedIn();
     } catch (error) {
       alert("LIFF init failed.");
       setError(`${error}`);
       alert(error);
+    }
+  };
+  
+  const handleLoggedIn = async () => {
+    try {
+      // LIFF初期化後、URLからshop_idを取得
+      const params = new URLSearchParams(window.location.search);
+      const shopIdFromParams = params.get('shop_id');
+      setShopId(shopIdFromParams);
+  
+      if (shopIdFromParams) {
+        // shop_idが存在する場合のみ処理を続行
+        await handleShopInfo(shopIdFromParams);
+      }
+    } catch (error) {
+      console.error('Error handling logged in:', error);
+      throw error;
     }
   };
 
