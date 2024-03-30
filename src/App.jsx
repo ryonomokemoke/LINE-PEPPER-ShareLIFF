@@ -33,8 +33,7 @@ function App() {
       //   setShopInfo(shopInfo1);
       // }, [shopInfo1]);
 
-      alert("shopInfo: " + shopInfo); //null
-      const shareCarousel = await createCarouselMessage(shopInfo);
+      const shareCarousel = await createCarouselMessage(shopInfoResponse);
       shareMessage(shareCarousel);
 
 
