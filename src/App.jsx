@@ -40,11 +40,20 @@ function App() {
       // LIFF初期化後、URLからshop_idを取得
       const params = new URLSearchParams(window.location.search);
       const shopIdFromParams = params.get('shop_id');
-      setShopId(shopIdFromParams);
-      const shopInfoResponse = await fetchShopInfo(shopIdFromParams);
-      alert("shopInfoResponse: " + shopInfoResponse);
-      setShopInfo(shopInfoResponse);
-      alert("shopInfo: " + shopInfo);
+
+      fetchShopInfo(shopIdFromParams)
+        .then((response) => {
+          setShopInfo(response, () => {
+            alert("shopInfo: " + shopInfo); // jump            
+          });
+        })
+        .catch((error) => {
+          console.error('Error fetching shop info:', error);
+        });
+
+      // alert("shopInfoResponse: " + shopInfoResponse);
+      // setShopInfo(shopInfoResponse);
+      // alert("shopInfo: " + shopInfo); // jump
 
       if (shopIdFromParams) {
         // shop_idが存在する場合のみ処理を続行
@@ -130,10 +139,10 @@ function App() {
   }
   
 
-  const fetchShopInfo = async (shopId) => {
+  const fetchShopInfo = async(shopId) => {
     try {
       const url = "https://62da9f8e44ec.ngrok.app/shop_info?shop_id=" + shopId;
-      const response = await axios.get(url, {
+      const response = axios.get(url, {
         headers: {
           "ngrok-skip-browser-warning": "69420"
         }
