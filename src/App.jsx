@@ -50,7 +50,8 @@ function App() {
     );
   }
 
-  const createCarouselMessage = async (responseJson) => {
+  const createCarouselMessage = async (response) => {
+    const responseJson = JSON.parse(response)
     alert("responseJson: " + responseJson)
     alert("responseJson['name']: " + responseJson['name'])
 
