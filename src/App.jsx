@@ -58,7 +58,7 @@ function App() {
   }
 
   const createCarouselMessage = async (responseJson) => {
-    alert(responseJson.img_url)
+    alert("responseJson: " + responseJson)
     // alert(responseJson.name)
     // alert(responseJson.access)
     // alert(responseJson.shop_id)
