@@ -41,7 +41,9 @@ function App() {
       const params = new URLSearchParams(window.location.search);
       const shopIdFromParams = params.get('shop_id');
       setShopId(shopIdFromParams);
-  
+      const shopInfoResponse = await fetchShopInfo(shopIdFromParams);
+      setShopInfo(fetchShopInfo(shopInfoResponse));
+      
       if (shopIdFromParams) {
         // shop_idが存在する場合のみ処理を続行
         await handleShopInfo(shopIdFromParams);
@@ -58,7 +60,7 @@ function App() {
       // カルーセルメッセージを生成
       const carouselMessage = await createCarouselMessage(shopInfo);
       // カルーセルメッセージを送信
-      shareMessage(carouselMessage);
+      shareMessage(carouselMessage); // jump
       
     } catch (error) {
       console.error('Error handling shop info:', error);
