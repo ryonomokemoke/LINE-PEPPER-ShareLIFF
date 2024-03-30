@@ -26,13 +26,6 @@ function App() {
       setShopId(shopIdFromParams); // 
       const shopInfoResponse = await fetchShopInfo(shopIdFromParams);
       setShopInfo(shopInfoResponse); // 取得したデータをshopInfoに設定
-      
-      // const shopInfo1 = await fetchShopInfo(shopId1); // fetchShopInfoを呼び出し json形式で取得
-      // alert("shopInfo1" + shopInfo1); // jsonきてる
-      // useEffect(() =>  {
-      //   setShopInfo(shopInfo1);
-      // }, [shopInfo1]);
-
       const shareCarousel = await createCarouselMessage(shopInfoResponse);
       shareMessage(shareCarousel);
 
@@ -59,6 +52,8 @@ function App() {
 
   const createCarouselMessage = async (responseJson) => {
     alert("responseJson: " + responseJson)
+    alert("responseJson['name']: " + responseJson['name'])
+
     // alert(responseJson.name)
     // alert(responseJson.access)
     // alert(responseJson.shop_id)
