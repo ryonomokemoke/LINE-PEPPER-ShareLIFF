@@ -56,7 +56,6 @@ function App() {
             thumbnailImageUrl: responseJson.img_url,
             title: responseJson.name,
             text: shopOverview,
-            // text: "test",
             defaultAction: {
               type: "uri",
               label: "店舗URL",
@@ -71,7 +70,7 @@ function App() {
               {
                 type: "uri",
                 label: "このお店を共有する",
-                uri: "https://liff.line.me/2000472699-9WJ36mXE" + "/shop_info?shop_id=" + responseJson.shop_id
+                uri: "https://liff.line.me/" + VITE_LIFF_ID + "/shop_info?shop_id=" + responseJson.shop_id
               }
             ]
           }
