@@ -7,8 +7,6 @@ import axios from 'axios';
 function App() {
   const [error, setError] = useState("");
   const [shopId, setShopId] = useState("");
-  const [responseDataView, setResponseDataView] = useState(null);
-  const [shopInfo, setShopInfo] = useState(null);
 
   useEffect(() => {
     initializeLIFF();
@@ -19,16 +17,21 @@ function App() {
       await liff.init({
         liffId: import.meta.env.VITE_LIFF_ID // ローカルではこっち
       });
-      alert("LIFF init succeeded.");
       // LIFF初期化後、URLからshop_idを取得
       const params = new URLSearchParams(window.location.search);
       const shopIdFromParams = params.get('shop_id');
       setShopId(shopIdFromParams); // 
-      const shopInfoResponse = await fetchShopInfo(shopIdFromParams);
-      setShopInfo(shopInfoResponse); // 取得したデータをshopInfoに設定
-      const shareCarousel = await createCarouselMessage(shopInfoResponse);
-      shareMessage(shareCarousel);
-
+      const shopInfoResponse = await fetchShopInfo(shopIdFromParams); // shopIdを元にDBから店舗情報を取得
+      const shareCarousel = await createCarouselMessage(shopInfoResponse); // 店舗情報から共有するカルーセルメッセージを作成
+      
+      liff.shareTargetPicker([shareCarousel]) // カルーセルメッセージを共有
+        .then(() => {
+            liff.closeWindow(); // 共有が完了したらウィンドウを閉じる
+        })
+        .catch((error) => {
+            alert('Failed to send message', error);
+        }
+      );
 
     } catch (error) {
       alert("LIFF init failed.");
@@ -37,21 +40,11 @@ function App() {
     }
   };
 
-  const shareMessage = async (message) => {
-    liff.shareTargetPicker([message])
-        .then(() => {
-            // 共有が完了したらウィンドウを閉じる
-            // liff.closeWindow();
-            console.log("")
-        })
-        .catch((error) => {
-            alert('Failed to send message', error);
-        }
-    );
-  }
-
   const createCarouselMessage = async (response) => {
-    const responseJson = JSON.parse(response) // responseが文字列できちゃってるっぽいからjson
+    const responseJson = JSON.parse(response) // 文字列できているresponseをjson形式に
+    const shopOverview = `${responseJson.access} \n
+                            ${responseJson.review_score} \n
+                            ${responseJson.review_quantity} \n` // カルーセルに表示する 店舗へのアクセス、レビュー、レビュー数 のメッセージ
 
     // カルーセルメッセージの内容を設定
     const carouselMessage = {
@@ -63,7 +56,7 @@ function App() {
           {
             thumbnailImageUrl: responseJson.img_url,
             title: responseJson.name,
-            text: responseJson.access,
+            text: shopOverview,
             defaultAction: {
               type: "uri",
               label: "店舗URL",
@@ -87,7 +80,6 @@ function App() {
         imageSize: "cover"
       }
     }
-    alert(carouselMessage)
     return carouselMessage
   }
   
@@ -103,7 +95,6 @@ function App() {
       if (response.status !== 200) {
         throw new Error('Network response was not ok');
       }
-      alert("reesponse.data: " + response.data)
       return response.data; // {'id': None, 'shop_id': 'J001089684', 'name': 'まぐろ一代 エキュート上野店', 'img_url': 'https://imgfp.hotp.jp/IMGH/83/20/P041798320/P041798320_238.jpg', 'access': ' JR東日本 山手線 上野駅 構内 3F  上野駅から125m', 'affiliate_url': 'https://ck.jp.ap.valuecommerce.com/servlet/referral?sid=3690883&pid=889260573&vc_url=https%3A%2F%2Fwww.hotpepper.jp%2FstrJ001089684%2F%3Fvos%3Dnhppvccp99002', 'review_score': None, 'review_quantity': None}
 
     } catch (error) {
@@ -121,16 +112,7 @@ function App() {
         {error && (
           <p>
             <code>{error}</code>
-          </p>
-          
-        )}
-        {shopInfo && (
-          <div>
-            <h2>Shop Information</h2>
-            <pre>{JSON.stringify(shopInfo, null, 2)}</pre>
-            <p>Name: {shopInfo.name}</p>
-            {/* 他の情報を表示 */}
-          </div>
+          </p>         
         )}
       </div>
     </>
