@@ -70,7 +70,7 @@ function App() {
               {
                 type: "uri",
                 label: "このお店を共有する",
-                uri: "https://liff.line.me/" + VITE_LIFF_ID + "/shop_info?shop_id=" + responseJson.shop_id
+                uri: "https://liff.line.me/" + import.meta.env.VITE_LIFF_ID + "/shop_info?shop_id=" + responseJson.shop_id
               }
             ]
           }
