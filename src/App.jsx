@@ -45,7 +45,7 @@ function App() {
     const shopOverview = `${responseJson.access} \n
                             ${responseJson.review_score} \n
                             ${responseJson.review_quantity} \n` // カルーセルに表示する 店舗へのアクセス、レビュー、レビュー数 のメッセージ
-
+    alert(shopOverview);
     // カルーセルメッセージの内容を設定
     const carouselMessage = {
       type: "template",
