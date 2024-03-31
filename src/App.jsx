@@ -56,7 +56,8 @@ function App() {
           {
             thumbnailImageUrl: responseJson.img_url,
             title: responseJson.name,
-            text: shopOverview,
+            // text: shopOverview,
+            text: "test",
             defaultAction: {
               type: "uri",
               label: "店舗URL",
