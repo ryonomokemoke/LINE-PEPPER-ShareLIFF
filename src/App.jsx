@@ -42,9 +42,8 @@ function App() {
 
   const createCarouselMessage = async (response) => {
     const responseJson = JSON.parse(response) // 文字列できているresponseをjson形式に
-    const shopOverview = `${responseJson.access} \n
-                            ${responseJson.review_score} \n
-                            ${responseJson.review_quantity} \n` // カルーセルに表示する 店舗へのアクセス、レビュー、レビュー数 のメッセージ
+     // カルーセルに表示する 店舗へのアクセス、レビュー、レビュー数 のメッセージ
+    const shopOverview = `${responseJson.access}\n${responseJson.review_score}\n${responseJson.review_quantity}\n`
     alert(shopOverview);
     // カルーセルメッセージの内容を設定
     const carouselMessage = {
